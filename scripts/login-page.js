@@ -1,5 +1,5 @@
 const loginInp = document.querySelectorAll(".inp-area input");
-const loginBtn = document.querySelector(".btn-area button");
+const loginBtn = document.querySelector(".btn-area a");
 
 let btnOver = () => {
   loginBtn.style.backgroundColor = "rgb(12, 144, 225)";

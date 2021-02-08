@@ -193,6 +193,12 @@ db.collection("posts").onSnapshot((snapshot) => {
       }_${date.getDate()}_${date.getHours()}_${date.getMinutes()}_${date.getSeconds()}`;
       let nowTimeArr = nowTime.split("_");
 
+      //transform the array elements into numbers
+      for (let i = 0; i < idSplited.length; i++) {
+        idSplited.splice(i, 1, Number(idSplited[i]));
+        nowTimeArr.splice(i, 1, Number(nowTimeArr[i]));
+      }
+
       const months = {
         1: "jan",
         2: "feb",
@@ -211,13 +217,29 @@ db.collection("posts").onSnapshot((snapshot) => {
       let time;
       if (nowTimeArr[0] == idSplited[0]) {
         if (nowTimeArr[1] == idSplited[1]) {
-          if(nowTimeArr[2] == idSplited[2]) {
-            if(nowTimeArr[3] == idSplited[3]) {
-              if(nowTimeArr[4]==idSplited[4]) {
-                time = `${nowTimeArr[5]-idSplited[5]}s`
-              } else {time = `${nowTimeArr[4]-idSplited[4]}m`}
-            } else{time = `${(nowTimeArr[3]-idSplited[3])}h`;}
-          } else {time = `${(nowTimeArr[2] - idSplited[2])}d`;}
+          if (nowTimeArr[2] == idSplited[2]) {
+            if (nowTimeArr[3] == idSplited[3]) {
+              if (nowTimeArr[4] == idSplited[4]) {
+                time = `${nowTimeArr[5] - idSplited[5]}s`;
+              } else {
+                time = `${nowTimeArr[4] - idSplited[4]}m`;
+              }
+            } else if (
+              nowTimeArr[3] - idSplited[3] == 1 &&
+              nowTimeArr[4] - idSplited[4] < 0
+            ) {
+              time = `${60 - idSplited[4] + nowTimeArr[4]}`;
+            } else {
+              time = `${nowTimeArr[3] - idSplited[3]}h`;
+            }
+          } else if (
+            nowTimeArr[2] - idSplited[2] == 1 &&
+            nowTimeArr[3] - idSplited[3] < 0
+          ) {
+            time = `${24 - idSplited[3] + nowTimeArr[3]}h`;
+          } else {
+            time = `${nowTimeArr[2] - idSplited[2]}d`;
+          }
         } else {
           time = `${months[nowTimeArr[1]]} ${nowTimeArr[2]}`;
         }

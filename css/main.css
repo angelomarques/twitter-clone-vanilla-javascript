@@ -20,7 +20,7 @@ body, textarea, button, span {
   overflow-x: hidden;
 }
 
-button {
+button, .btn-area a {
   cursor: pointer;
   margin-bottom: 15px;
   height: 100%;
@@ -28,7 +28,7 @@ button {
   outline: none;
 }
 
-button span {
+button span, .main-btn span {
   font-size: 15px;
   font-weight: bold;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
